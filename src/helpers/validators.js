@@ -36,42 +36,45 @@ import {
     not
 } from 'ramda';
 
+import { SHAPES } from '../constants';
+import { COLORS } from '../constants';
+
 // Colors
-const isGreen = equals('green');
-const isRed = equals('red');
-const isOrange = equals('orange');
-const isBlue = equals('blue');
-const isAnyColor = includes(__, ['white', 'green', 'red', 'orange', 'blue']);
+const isGreen = equals(COLORS.GREEN);
+const isRed = equals(COLORS.RED);
+const isOrange = equals(COLORS.ORANGE);
+const isBlue = equals(COLORS.BLUE);
+const isAnyColor = includes(__, [COLORS.WHITE, COLORS.GREEN, COLORS.RED, COLORS.ORANGE, COLORS.BLUE]);
 
 
 // Square
-const isWhiteSquare = propEq('square', 'white');
-const isGreenSquare = propEq('square', 'green');
+const isWhiteSquare = propEq(SHAPES.SQUARE, COLORS.WHITE);
+const isGreenSquare = propEq(SHAPES.SQUARE, COLORS.GREEN);
 
 const isNotWhiteSquare = compose(not, isWhiteSquare);
 
-const getSquareColor = curry(prop)('square');
+const getSquareColor = curry(prop)(SHAPES.SQUARE);
 
 
 // Star
-const isWhiteStar = propEq('star', 'white');
-const isRedStar = propEq('star', 'red');
+const isWhiteStar = propEq(SHAPES.STAR, COLORS.WHITE);
+const isRedStar = propEq(SHAPES.STAR, COLORS.RED);
 
 const isNotWhiteStar = compose(not, isWhiteStar);
 const isNotRedStar = compose(not, isRedStar);
 
 
 // Triangle
-const isWhiteTriangle = propEq('triangle', 'white');
-const isGreenTriangle = propEq('triangle', 'green');
+const isWhiteTriangle = propEq(SHAPES.TRIANGLE, COLORS.WHITE);
+const isGreenTriangle = propEq(SHAPES.TRIANGLE, COLORS.GREEN);
 
 const isNotWhiteTriangle = compose(not, isWhiteTriangle);
 
-const getTriangleColor = curry(prop)('triangle');
+const getTriangleColor = curry(prop)(SHAPES.TRIANGLE);
 
 
 // Circle
-const isWhiteCircle = propEq('circle', 'white');
+const isWhiteCircle = propEq(SHAPES.CIRCLE, COLORS.WHITE);
 
 
 // Rest
@@ -81,7 +84,7 @@ const eq2 = curry(equals)(2);
 const eq3 = curry(equals)(3);
 const eq4 = curry(equals)(4);
 const getMax = curry(apply)(Math.max);
-const omitWhite = curry(omit)(['white']);
+const omitWhite = curry(omit)([COLORS.WHITE]);
 const allIsOrange = curry(all)(isOrange);
 const allIsGreen = curry(all)(isGreen);
 
@@ -114,10 +117,10 @@ export const validateFieldN3 = (shape) => {
 
 // 4. Синий круг, красная звезда, оранжевый квадрат треугольник любого цвета
 export const validateFieldN4 = where({
-  circle: isBlue,
-  star: isRed,
-  square: isOrange,
-  triangle: isAnyColor,
+  [SHAPES.CIRCLE]: isBlue,
+  [SHAPES.STAR]: isRed,
+  [SHAPES.SQUARE]: isOrange,
+  [SHAPES.TRIANGLE]: isAnyColor,
 });
 
 // 5. Три фигуры одного любого цвета кроме белого (четыре фигуры одного цвета – это тоже true).
